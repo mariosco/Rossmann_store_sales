@@ -35,7 +35,7 @@ module internal Load =
     let multiple_features (feature_names:string[]) =
         let file_streamreaders = 
             feature_names
-            |> Array.map (fun name -> new StreamReader (Path.Combine(File_locations.Features, name) |> File_extension.csv))
+            |> Array.map (fun name -> new StreamReader (Path.Combine(File_directories.Features, name) |> File_extension.csv))
 
         file_streamreaders |> Array.iter (fun sr -> ignore (sr.ReadLine ()))
 

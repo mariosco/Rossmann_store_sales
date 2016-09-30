@@ -16,7 +16,7 @@ type Navigation_Option = Single_store_testing | Charting | Multiple_store_testin
 module Program = 
     [<EntryPoint>]
     let Main (args:string[]) = 
-        Manage_datasets_API.Generate_basic_features
+        Manage_datasets_API.Generate_basic_features ()
         (*(*let stopWatch = new System.Diagnostics.Stopwatch()
         stopWatch.Start()
 
