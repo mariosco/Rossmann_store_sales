@@ -1,6 +1,6 @@
 ﻿namespace Rossmann
 
-open Utility_functions
+open Utility_functions.Parsing
 open System
 
 module Feature_selector = () (*

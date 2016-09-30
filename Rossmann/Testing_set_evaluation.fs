@@ -2,7 +2,7 @@
 
 open System
 open Training
-open Utility_functions
+open Utility_functions.Parsing
 open Feature_selector
 open Global_configurations.Data_types
 
@@ -52,5 +52,5 @@ module Testing_set_evaluation =
 
     let Print_evaluation evaluation = 
         evaluation 
-        |> Get_percentage 
+        |> Sprintf_probability_percentage 
         |> printfn "Mean error: %s"
