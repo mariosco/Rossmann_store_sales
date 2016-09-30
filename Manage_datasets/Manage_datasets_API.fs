@@ -8,10 +8,10 @@ module Manage_datasets_API =
         let dataset_filename = "initial_dataset.csv"
 
         let dataset = 
-            File_locations.Raw_trainigset
+            File_locations.RawTrainigSet
             |> Load.dataset 
             |> Parse.string_dataset
-        Save.dataset dataset (File_locations.Initial_dataset + dataset_filename)
+        Save.dataset dataset (File_locations.InitialDataset + dataset_filename)
 
         let features = Manage_features.split_dataset_to_features dataset
         features
