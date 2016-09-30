@@ -16,7 +16,8 @@ type Navigation_Option = Single_store_testing | Charting | Multiple_store_testin
 module Program = 
     [<EntryPoint>]
     let Main (args:string[]) = 
-        (*let stopWatch = new System.Diagnostics.Stopwatch()
+        Manage_datasets_API.Generate_basic_features
+        (*(*let stopWatch = new System.Diagnostics.Stopwatch()
         stopWatch.Start()
 
         stopWatch.Stop()
@@ -96,5 +97,5 @@ module Program =
                 save_in_desktop*)
             
             | ConsoleKey.Escape -> Console.WriteLine "Exiting program"
-            | _ -> Console.WriteLine "Invalid input.\n"
+            | _ -> Console.WriteLine "Invalid input.\n"*)
         0

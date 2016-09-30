@@ -1,7 +1,6 @@
 ﻿namespace Manage_datasets
 
 open System.IO
-open System.Collections.Generic
 open Global_configurations.Data_types
 open Global_configurations.Config
 
@@ -32,18 +31,18 @@ module internal Load =
             let name = stream.ReadLine ()
             stream.Close ()
             name)
-
+            
     let multiple_features (feature_names:string[]) =
         let file_streamreaders = 
             feature_names
-            |> Array.map (fun name -> new StreamReader (File_locations.Features + name + File_endings.csv))
+            |> Array.map (fun name -> new StreamReader (Path.Combine(File_locations.Features, name) |> File_extension.csv))
 
         file_streamreaders |> Array.iter (fun sr -> ignore (sr.ReadLine ()))
 
         let observations =
             Array.init 
                 Data_parameters.Number_of_observations
-                (fun ind -> file_streamreaders |> Array.map (fun sr ->  float (sr.ReadLine ())))
+                (fun _ -> file_streamreaders |> Array.map (fun sr ->  float (sr.ReadLine ())))
 
         file_streamreaders |> Array.iter (fun sr -> sr.Close ())
 
