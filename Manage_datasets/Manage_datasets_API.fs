@@ -13,23 +13,32 @@ module Manage_datasets_API =
 
         Save.dataset dataset File_paths.Initial_dataset
     
+    let Initial_dataset = 
+        File_paths.Initial_dataset
+        |> Load.dataset
+        |> fun { Header = header; Observations = obs } -> 
+            { Header = header; 
+              Observations = obs |> Array.Parallel.map (Array.map float) }
+
     let Generate_basic_features () =
-        let features = 
-            File_paths.Initial_dataset
-            |> Load.dataset
-            |> Manage_features.split_dataset_to_features
+        let features = Manage_features.split_dataset_to_features Initial_dataset
 
         features
         |> Array.Parallel.iter (fun feature ->
             let filepath = Path.Combine(File_directories.Features, feature.Name) |> File_extension.csv
             Save.feature feature filepath)
 
+
     let Load_feature_set (feature_names:string[]) = Load.multiple_features feature_names
 
-    let Load_feature feature_name = Load.feature (Path.Combine(File_directories.Features, feature_name) |> File_extension.csv)
+    let Load_feature feature_name = 
+        let filepath = Path.Combine(File_directories.Features, feature_name) |> File_extension.csv
+        Load.feature filepath
 
     let Get_available_feature_names () = Load.feature_names File_directories.Features
 
-    let Save_feature (feature:Feature<float>) = Save.feature feature (Path.Combine(File_directories.Features, feature.Name) |> File_extension.csv)
+    let Save_feature (feature:Feature<float>) = 
+        let filepath = Path.Combine(File_directories.Features, feature.Name) |> File_extension.csv
+        Save.feature feature filepath
 
     let Group_by_feature dataset feature_name = Transform.group_by_feature dataset feature_name 

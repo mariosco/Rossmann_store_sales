@@ -30,7 +30,7 @@ module internal Parse =
             match type_recognition_lines.Length > 0 with 
             | true -> 
                 data.Header
-                |> Array.mapi (fun ind col -> 
+                |> Array.mapi (fun ind _ -> 
                     let feature_vector = type_recognition_lines |> Array.map (fun obs -> obs.[ind])
                     let data_header = data.Header.[ind].Replace ("\"", "")
                     let is_date fvec = (fvec |> Array.head |> tryParseDate).IsSome

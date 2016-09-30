@@ -1,7 +1,6 @@
 ﻿namespace Manage_datasets
 
 open NUnit.Framework
-open NUnit
 open Global_configurations.Data_types
 open System
 

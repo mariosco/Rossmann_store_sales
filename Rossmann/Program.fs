@@ -10,13 +10,15 @@ open Utility_functions
 open Testing_set_evaluation
 open Manage_datasets
 open Global_configurations.Data_types
+open Global_configurations.Config
 
 type Navigation_Option = Single_store_testing | Charting | Multiple_store_testing | Save_model_evaluation
 
 module Program = 
     [<EntryPoint>]
     let Main (args:string[]) = 
-        Manage_datasets_API.Generate_basic_features ()
+        let test = Manage_datasets_API.Group_by_feature Manage_datasets_API.Initial_dataset "Open"
+        printf "%A" test
         (*(*let stopWatch = new System.Diagnostics.Stopwatch()
         stopWatch.Start()
 
@@ -98,4 +100,5 @@ module Program =
             
             | ConsoleKey.Escape -> Console.WriteLine "Exiting program"
             | _ -> Console.WriteLine "Invalid input.\n"*)
+        Console.ReadKey () |> ignore
         0
