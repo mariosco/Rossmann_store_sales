@@ -2,7 +2,6 @@
 
 open System
 open System.IO
-open Utility_functions
 open Charting_functions
 open Feature_selector
 open Training
@@ -17,9 +16,7 @@ type Navigation_Option = Single_store_testing | Charting | Multiple_store_testin
 module Program = 
     [<EntryPoint>]
     let Main (args:string[]) = 
-        let test = Manage_datasets_API.Group_by_feature Manage_datasets_API.Initial_dataset "Open"
-        printf "%A" test
-        (*(*let stopWatch = new System.Diagnostics.Stopwatch()
+        (*let stopWatch = new System.Diagnostics.Stopwatch()
         stopWatch.Start()
 
         stopWatch.Stop()
@@ -69,7 +66,7 @@ module Program =
 
                 let one_store_evaluation = Evaluate_one_store one_store_data one_store_model
 
-                printfn "Error = %s\n" (Get_percentage one_store_evaluation)
+                printfn "Error = %s\n" (Parsing.Sprintf_probability_percentage one_store_evaluation)
             | ConsoleKey.D2 -> Console.WriteLine "Not implemented\n"
                 //Comparison_chart 
                   //  30 
@@ -99,6 +96,6 @@ module Program =
                 save_in_desktop*)
             
             | ConsoleKey.Escape -> Console.WriteLine "Exiting program"
-            | _ -> Console.WriteLine "Invalid input.\n"*)
+            | _ -> Console.WriteLine "Invalid input.\n"
         Console.ReadKey () |> ignore
         0
