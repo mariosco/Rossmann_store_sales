@@ -1,6 +1,5 @@
 ﻿namespace Training
 
-open System
 open MathNet.Numerics.LinearAlgebra
 open MathNet.Numerics.Providers.LinearAlgebra.Mkl
 open Global_configurations.Data_types
@@ -24,8 +23,9 @@ module Single_model =
             |> fun (x, y) -> (Array.toList x, Array.toList y)
             
         let theta = estimate (vector Yt) (matrix (Xt))
+        
         let predict = predictor featurizer theta
-        // TODO: Gather information about all the public holidays and the opening days
+        
         let holiday_filtered_prediction (obs:float[]) = 
             let store_open_index = dataset.Header |> Array.findIndex (fun name -> name = "Open")
             match obs.[store_open_index] <> 0.0 && predict obs > 0.0 with

@@ -1,7 +1,5 @@
 ﻿namespace Training
 
-open Single_model
-
 module Multiple_models = 
     let Train featurizer feature_to_optimize multiple_store_datasets = 
         multiple_store_datasets 
