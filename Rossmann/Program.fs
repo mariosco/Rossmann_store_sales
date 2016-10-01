@@ -15,52 +15,31 @@ type Navigation_Option = Single_store_testing | Charting | Multiple_store_testin
 
 module Program = 
     [<EntryPoint>]
-    let Main (args:string[]) = 
-        (*let stopWatch = new System.Diagnostics.Stopwatch()
-        stopWatch.Start()
-
-        stopWatch.Stop()
-        Console.WriteLine stopWatch.ElapsedMilliseconds
-        Console.WriteLine "Done!"
-        let dummy = Console.ReadKey ()*)
-
-        let dataset = Manage_datasets_API.Load_feature_set (Manage_datasets_API.Get_available_feature_names()) 
-        let index_of_sales = dataset.Header |> Array.findIndex (fun name -> name = "Sales")
-        let index_of_store = dataset.Header |> Array.findIndex (fun name -> name = "Store")
-        let index_of_customers = dataset.Header |> Array.findIndex (fun name -> name = "Customers")
-        let index_of_date = dataset.Header |> Array.findIndex (fun name -> name = "Date_day")
-        let grouped_dataset = Manage_datasets_API.Group_by_feature dataset "Store"
-        let featurizer = Arrays.filter_array_at_indices [|index_of_store; index_of_sales; index_of_customers|] >> Array.toList
-        let feature_to_optimize = fun (obs:float[]) -> obs.[index_of_sales]
-
-        let suspicious_data_group = 
-            grouped_dataset 
-            |> Array.filter (fun (st, data) -> st = 85.0) 
-
-        let suspicious_data = 
-            suspicious_data_group
-            |> Array.map (fun (st, data) -> 
-                let obs = data.Observations
-                sprintf 
-                    "%A" 
-                    (obs |> Array.iter (fun line -> File.WriteAllText (@"C:\Users\Marios\Desktop\suspicious.txt", line.[index_of_sales].ToString() + line.[index_of_date].ToString()))))
+    let Main (_:string[]) = 
+        let dataset = 
+            Manage_datasets_API.Get_available_feature_names ()
+            |> Manage_datasets_API.Load_feature_set             
         
-        Console.WriteLine (suspicious_data.Length)
-        let mutable choice = new ConsoleKey()
+        let get_index name = dataset.Header |> Array.findIndex (fun n -> n = name)
+        let index_of_sales = get_index "Sales"
+        let index_of_store = get_index "Store"
+        let index_of_customers = get_index "Customers"
 
+        let dataset_grouped_by_store = Manage_datasets_API.Group_by_feature dataset "Store"
+        let featurizer = Arrays.filter_elements_at_indices [|index_of_store; index_of_sales; index_of_customers|] >> Array.toList
+        let feature_to_optimize = fun (obs:float[]) -> obs.[index_of_sales]
+        
+        let mutable choice = new ConsoleKey()
         while choice <> ConsoleKey.Escape do
             Console.WriteLine "Please select an option:\n1. Single store testing\n2. Charting\n3. Multiple store testing\n4. Save model evaluation\n"
-            let input = Console.ReadKey ()
-            choice <- input.Key
+            choice <- (Console.ReadKey ()).Key
+            Console.Clear ()
 
             match choice with 
             | ConsoleKey.D1 -> 
-                /////////////////////////////////////////////////////////////////////////////////////
-                // TODO: Caution!! Line 480, 1336, 2192, 3048, ... of testing data, missing Open replaced with 0
-                // TODO: Dots during the training to monitor progress
                 Console.WriteLine "Select store of preference:"
                 let store = Int32.Parse (Console.ReadLine())
-                let one_store_data = snd grouped_dataset.[store]
+                let one_store_data = snd dataset_grouped_by_store.[store]
 
                 let one_store_model =  Single_model.Train featurizer feature_to_optimize one_store_data |> snd
 
@@ -76,8 +55,9 @@ module Program =
                     //"Sales"
                 /////////////////////////////////////////////////////////////////////////////////////
             | ConsoleKey.D3 ->
-                let multiple_stores_models = Multiple_models.Train featurizer feature_to_optimize grouped_dataset
-                let multiple_stores_evaluation = Evaluate_multiple_stores multiple_stores_models grouped_dataset
+                // TODO: Dots during the training to monitor progress
+                let multiple_stores_models = Multiple_models.Train featurizer feature_to_optimize dataset_grouped_by_store
+                let multiple_stores_evaluation = Evaluate_multiple_stores multiple_stores_models dataset_grouped_by_store
                 printfn "%A" (multiple_stores_evaluation |> Array.filter (fun (st, ev) -> ev > 1.0))
                 let evaluation = Average_evaluation multiple_stores_evaluation
                 Print_evaluation evaluation
@@ -97,5 +77,5 @@ module Program =
             
             | ConsoleKey.Escape -> Console.WriteLine "Exiting program"
             | _ -> Console.WriteLine "Invalid input.\n"
-        Console.ReadKey () |> ignore
+
         0
