@@ -59,12 +59,12 @@
     <Compile Include="Feature_selector.fs" />
     <Compile Include="Testing_set_evaluation.fs" />
     <None Include="App.config" />
-    <None Include="Linear_regression.fsx" />
     <None Include="sample_submission.csv" />
     <None Include="store.csv" />
     <None Include="test.csv" />
     <None Include="train.csv" />
     <Content Include="packages.config" />
+    <Compile Include="Navigation_actions.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
