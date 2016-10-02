@@ -6,7 +6,8 @@ open Navigation_actions
 module Program = 
     [<EntryPoint>]
     let Main (_:string[]) =
-        Generate_initial_data ()
+        Generate_storage_directories ()
+        Generate_initial_data () 
 
         let (dataset_grouped_by_store, featurizer, feature_to_optimize) = Load_datasets ()
         

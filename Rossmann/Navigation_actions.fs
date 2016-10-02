@@ -10,6 +10,14 @@ open Testing_set_evaluation
 open Global_configurations.Config
 
 module Navigation_actions =
+    let Generate_storage_directories () =
+        let rossmann = @"C:\Temp\RossmannData"
+        let subfolders = 
+            ["Datasets"; "Features"; "InitialDataset"; "RawData"]
+            |> List.map(fun name -> Path.Combine(rossmann, name))
+
+        subfolders |> List.iter (Directory.CreateDirectory >> ignore)
+
     let Generate_initial_data () =
         if Directory.EnumerateFiles File_directories.Initial_dataset |> Seq.isEmpty
         then Console.WriteLine "Generating initial dataset..."
