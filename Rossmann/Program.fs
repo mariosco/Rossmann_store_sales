@@ -6,6 +6,8 @@ open Navigation_actions
 module Program = 
     [<EntryPoint>]
     let Main (_:string[]) =
+        Generate_initial_data ()
+
         let (dataset_grouped_by_store, featurizer, feature_to_optimize) = Load_datasets ()
         
         let mutable choice = new ConsoleKey()
@@ -36,7 +38,8 @@ module Program =
                     let desktop = @"C:\Users\Marios\Desktop\submission_file.txt"
                     File.WriteAllLines (desktop, ["\"Id\",\"Sales\""])
                     File.AppendAllLines (desktop, ouput_strings)
-                save_in_desktop*)            
+                save_in_desktop*)  
+            | ConsoleKey.D4 -> Console.WriteLine "Not implemented\n"          
             | ConsoleKey.Escape -> Console.WriteLine "Exiting program"
             | _ -> Console.WriteLine "Invalid input.\n"
 

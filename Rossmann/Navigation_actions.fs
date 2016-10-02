@@ -1,13 +1,26 @@
 ﻿namespace Rossmann
 
 open System
+open System.IO
 open Manage_datasets
 open Utility_functions
 open Global_configurations.Data_types
 open Training
 open Testing_set_evaluation
+open Global_configurations.Config
 
 module Navigation_actions =
+    let Generate_initial_data () =
+        if Directory.EnumerateFiles File_directories.Initial_dataset |> Seq.isEmpty
+        then Console.WriteLine "Generating initial dataset..."
+             Manage_datasets_API.Generate_initial_dataset ()
+             Console.Clear ()
+             
+        if Directory.EnumerateFiles File_directories.Features |> Seq.isEmpty
+        then Console.WriteLine "Generating basic features..."
+             Manage_datasets_API.Generate_basic_features ()
+             Console.Clear ()
+
     let Load_datasets () =
         Console.WriteLine "Loading datasets..."
         let dataset = 
