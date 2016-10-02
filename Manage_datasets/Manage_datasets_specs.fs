@@ -73,7 +73,7 @@ module Manage_datasets_specs =
                    {Name = "StateHoliday"; Observations = [|"\"0\"";"\"a\"";"\"0\""|]};
                    {Name = "SchoolHoliday"; Observations = [|"\"1\"";"\"1\"";"\"1\""|]};|]
 
-            let result = Manage_features.split_dataset_to_features Test_objects.test_dataset
+            let result = Manage_features.split_dataset_to_features Test_objects.test_dataset id Test_objects.test_dataset.Header
             result = expected_result
 
        

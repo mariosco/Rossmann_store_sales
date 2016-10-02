@@ -5,14 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>7f651c41-0c68-414d-9f4e-bb3a7d7834c9</ProjectGuid>
+    <ProjectGuid>6b1ca534-7fb6-4961-a95c-008cbbf94163</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Manage_datasets</RootNamespace>
-    <AssemblyName>Manage_datasets</AssemblyName>
+    <RootNamespace>Featurizers</RootNamespace>
+    <AssemblyName>Featurizers</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>Manage_datasets</Name>
+    <Name>Featurizers</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\Manage_datasets.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Featurizers.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,8 +31,29 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\Manage_datasets.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Featurizers.XML</DocumentationFile>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <None Include="Script.fsx" />
+    <Compile Include="Feature_selector.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility_functions\Utility_functions.fsproj">
+      <Name>Utility_functions</Name>
+      <Project>{52a9ef02-a80a-4b13-b6a7-6c37331f3078}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>
@@ -49,43 +70,6 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Load.fs" />
-    <Compile Include="Save.fs" />
-    <Compile Include="Parse.fs" />
-    <Compile Include="Manage_features.fs" />
-    <Compile Include="Transform.fs" />
-    <Compile Include="Manage_datasets_specs.fs" />
-    <Compile Include="Manage_datasets_API.fs" />
-    <None Include="Script.fsx" />
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Featurizers\Featurizers.fsproj">
-      <Name>Featurizers</Name>
-      <Project>{6b1ca534-7fb6-4961-a95c-008cbbf94163}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Global_configurations\Global_configurations.fsproj">
-      <Name>Global_configurations</Name>
-      <Project>{922a9e60-359e-4d9e-869c-f7893c72b8da}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

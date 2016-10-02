@@ -3,13 +3,14 @@
 open Global_configurations.Data_types
 
 module internal Manage_features =
-    let split_dataset_to_features (dataset:Dataset<'a>) =
-        let feature_observations =
-            Array.init
-                dataset.Header.Length
-                (fun ind -> 
-                    dataset.Observations
-                    |> Array.map (fun obs -> obs.[ind]))
-        Array.mapi             
-            (fun ind feat -> { Name = dataset.Header.[ind]; Observations = feat})
-            feature_observations
+    let split_dataset_to_features (dataset:Dataset<'a>) (transformation:'a[] -> 'a[]) header =
+        let new_observations = dataset.Observations |> Array.Parallel.map transformation
+        let dataset_with_new_features =
+            { Header = header;
+              Observations = new_observations }
+
+        Array.Parallel.init
+            header.Length
+            (fun ind -> 
+                { Name = header.[ind];
+                  Observations = dataset_with_new_features.Observations |> Array.map (fun obs -> obs.[ind])})

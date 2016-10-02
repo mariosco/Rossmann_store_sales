@@ -3,7 +3,6 @@
 open System
 open Training
 open Utility_functions.Parsing
-open Feature_selector
 open Global_configurations.Data_types
 
 module Testing_set_evaluation =

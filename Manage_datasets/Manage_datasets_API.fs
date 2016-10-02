@@ -3,6 +3,7 @@
 open Global_configurations.Config
 open Global_configurations.Data_types
 open System.IO
+open Featurizers
 
 module Manage_datasets_API =
     let Generate_initial_dataset () =
@@ -20,8 +21,10 @@ module Manage_datasets_API =
             { Header = header; 
               Observations = obs |> Array.Parallel.map (Array.map float) }
 
-    let Generate_basic_features () =
-        let features = Manage_features.split_dataset_to_features Initial_dataset
+    let Generate_features () =
+        let index_of = Initial_dataset.Header |> Array.mapi (fun i name -> (name, i)) |> Map.ofArray
+        let transformation = Main_featurizer.Transformation index_of
+        let features = Manage_features.split_dataset_to_features Initial_dataset transformation Main_featurizer.Header
 
         features
         |> Array.Parallel.iter (fun feature ->

@@ -13,6 +13,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Utility_functions", "Utilit
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Training", "Training\Training.fsproj", "{6D7D5C30-C3C0-44AD-AE15-832BAC8D9B0E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Featurizers", "Featurizers\Featurizers.fsproj", "{6B1CA534-7FB6-4961-A95C-008CBBF94163}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6D7D5C30-C3C0-44AD-AE15-832BAC8D9B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D7D5C30-C3C0-44AD-AE15-832BAC8D9B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D7D5C30-C3C0-44AD-AE15-832BAC8D9B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B1CA534-7FB6-4961-A95C-008CBBF94163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1CA534-7FB6-4961-A95C-008CBBF94163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1CA534-7FB6-4961-A95C-008CBBF94163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1CA534-7FB6-4961-A95C-008CBBF94163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

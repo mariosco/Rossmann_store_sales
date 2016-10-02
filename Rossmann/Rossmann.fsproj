@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Charting_functions.fs" />
-    <Compile Include="Feature_selector.fs" />
     <Compile Include="Testing_set_evaluation.fs" />
     <None Include="App.config" />
     <None Include="sample_submission.csv" />
@@ -119,6 +118,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Featurizers\Featurizers.fsproj">
+      <Name>Featurizers</Name>
+      <Project>{6b1ca534-7fb6-4961-a95c-008cbbf94163}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Global_configurations\Global_configurations.fsproj">
       <Name>Global_configurations</Name>
       <Project>{922a9e60-359e-4d9e-869c-f7893c72b8da}</Project>

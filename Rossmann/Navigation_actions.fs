@@ -25,8 +25,8 @@ module Navigation_actions =
              Console.Clear ()
              
         if Directory.EnumerateFiles File_directories.Features |> Seq.isEmpty
-        then Console.WriteLine "Generating basic features..."
-             Manage_datasets_API.Generate_basic_features ()
+        then Console.WriteLine "Generating features..."
+             Manage_datasets_API.Generate_features ()
              Console.Clear ()
 
     let Load_datasets () =
