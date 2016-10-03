@@ -3,7 +3,7 @@
 open Utility_functions.Parsing
 open System
 
-module Main_featurizer =
+module Feature_production =
     let evaluation = [|"Sales"; "Store"; "Customers"; "Open"|]
 
     let Header = 

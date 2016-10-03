@@ -23,8 +23,8 @@ module Manage_datasets_API =
 
     let Generate_features () =
         let index_of = Initial_dataset.Header |> Array.mapi (fun i name -> (name, i)) |> Map.ofArray
-        let transformation = Main_featurizer.Transformation index_of
-        let features = Manage_features.split_dataset_to_features Initial_dataset transformation Main_featurizer.Header
+        let transformation = Feature_production.Transformation index_of
+        let features = Manage_features.split_dataset_to_features Initial_dataset transformation Feature_production.Header
 
         features
         |> Array.Parallel.iter (fun feature ->

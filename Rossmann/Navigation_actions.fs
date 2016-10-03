@@ -8,6 +8,7 @@ open Global_configurations.Data_types
 open Training
 open Testing_set_evaluation
 open Global_configurations.Config
+open Featurizers
 
 module Navigation_actions =
     let Generate_storage_directories () =
@@ -41,7 +42,7 @@ module Navigation_actions =
         let index_of_customers = get_index "Customers"
 
         let dataset_grouped_by_store = Manage_datasets_API.Group_by_feature dataset "Store"
-        let featurizer = Arrays.filter_elements_at_indices [|index_of_store; index_of_sales; index_of_customers|] >> Array.toList
+        let featurizer = Testing_featurizers.Trivial_transformation [|index_of_store; index_of_sales; index_of_customers|]
         let feature_to_optimize = fun (obs:float[]) -> obs.[index_of_sales]
         Console.Clear ()
         (dataset_grouped_by_store, featurizer, feature_to_optimize)

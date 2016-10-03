@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <None Include="Script.fsx" />
-    <Compile Include="Feature_selector.fs" />
+    <Compile Include="Feature_production.fs" />
+    <Compile Include="Testing_featurizers.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility_functions\Utility_functions.fsproj">
