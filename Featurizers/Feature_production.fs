@@ -24,8 +24,8 @@ module Feature_production =
 
     let Transformation (index_of:Map<string, int>) (obs:float[]) = 
         let day_just_before_christmas = 
-            obs.[index_of.["Date_month"]] = 12. 
-             //&& obs.[index_of.["D"]] < 25.) 
+            (obs.[index_of.["Date_month"]] = 12. 
+             && obs.[index_of.["Date_day"]] < 25.) 
             |> Boolean_to_float 
         let day_of_week = float obs.[index_of.["DayOfWeek"]]
 

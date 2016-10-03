@@ -13,20 +13,20 @@ module Program =
         
         let mutable choice = new ConsoleKey()
         while choice <> ConsoleKey.Escape do
-            Console.WriteLine "Please select an option:\n1. Single store testing\n2. Charting\n3. Multiple store testing\n4. Save model evaluation\n"
+            Console.WriteLine "Please select an option:\n1. Single store testing\n2. Multiple store testing\n"
             choice <- (Console.ReadKey ()).Key
             Console.Clear ()
 
             match choice with 
             | ConsoleKey.D1 -> Single_store_testing dataset_grouped_by_store featurizer feature_to_optimize                
-            | ConsoleKey.D2 -> Console.WriteLine "Not implemented\n"
+            //| ConsoleKey.D2 -> Console.WriteLine "Not implemented\n"
                 //Comparison_chart 
                   //  30 
                     //(fun (row:Datapoint) -> (row.DayOfWeek, row.Sales)) 
                     //one_store_data
                     //"dow" 
                     //"Sales"
-            | ConsoleKey.D3 -> Multiple_stores_testing dataset_grouped_by_store featurizer feature_to_optimize
+            | ConsoleKey.D2 -> Multiple_stores_testing dataset_grouped_by_store featurizer feature_to_optimize
                 
             (*| ConsoleKey.D4 -> 
                 let testing_data = Testing_data
@@ -40,7 +40,6 @@ module Program =
                     File.WriteAllLines (desktop, ["\"Id\",\"Sales\""])
                     File.AppendAllLines (desktop, ouput_strings)
                 save_in_desktop*)  
-            | ConsoleKey.D4 -> Console.WriteLine "Not implemented\n"          
             | ConsoleKey.Escape -> Console.WriteLine "Exiting program"
             | _ -> Console.WriteLine "Invalid input.\n"
 
